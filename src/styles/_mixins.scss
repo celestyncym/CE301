@@ -1,0 +1,51 @@
+@import "./_variables.scss";
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin sidebar-buttons {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  border: $border;
+  border-radius: 9px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: 0px 5px 4px -3px #01522b;
+}
+
+@mixin card-border {
+  border: 1px solid $card-border;
+}
+
+@mixin hover1 {
+  background-color: $primary;
+  color: $secondary;
+}
+
+@mixin hover2 {
+  background-color: $secondary;
+  color: $primary;
+}
+
+@mixin link-active {
+  box-shadow: inset 4px 5px 4px -3px #01522b;
+}
+
+@mixin primary-button {
+  background-color: $primary;
+  color: $secondary;
+  border: none;
+  border-radius: 9px;
+  padding: 0.7rem;
+  cursor: pointer;
+}
+
+@mixin select {
+}

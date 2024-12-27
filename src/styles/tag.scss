@@ -1,0 +1,29 @@
+@import "./_variables";
+@import "./mixins";
+
+.tags {
+  margin: 1rem 0;
+}
+
+.tag {
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem 0 0;
+  border: 1px solid $primary;
+  border-radius: 20px;
+  font-family: $primary-font;
+  font-size: 1rem;
+  background-color: $secondary;
+  color: $primary;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: $primary;
+    color: $secondary;
+  }
+
+  &.active {
+    background-color: $primary;
+    color: $secondary;
+  }
+}

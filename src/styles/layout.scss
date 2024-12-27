@@ -1,0 +1,29 @@
+@import "./_variables";
+@import "./mixins";
+
+.app-layout {
+  display: flex;
+  height: 100vh;
+  background-color: $background;
+  overflow: hidden;
+
+  &.sidebar-open .main-wrapper {
+    margin-left: 250px; // width of the sidebar + 32px padding
+    transition: margin 0.3s ease;
+  }
+
+  &.sidebar-closed .main-wrapper {
+    margin-left: 0;
+    transition: margin 0.3s ease;
+  }
+
+  .main-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .content-wrapper {
+    padding: 1rem 2rem 2rem 2rem;
+  }
+}

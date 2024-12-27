@@ -1,0 +1,22 @@
+@import "./_variables";
+@import "./mixins";
+
+.main-content {
+  font-family: $primary-font;
+
+  h1 {
+    font-family: $header-font;
+    font-size: 1.5rem;
+    color: $header;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  .primary-button {
+    @include primary-button;
+  }
+}

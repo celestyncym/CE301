@@ -1,0 +1,121 @@
+@import "./_variables.scss";
+@import "./_mixins.scss";
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  background-color: $secondary;
+  color: $primary;
+  font-family: $primary-font;
+  border-right: 1px solid $card-border;
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  box-sizing: border-box;
+  transition: transform 0.3s ease;
+
+  // Initially show sidebar for desktop
+  &.closed {
+    transform: translateX(-100%); // Slide sidebar out of view
+  }
+
+  .sidebar-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+
+    .profile {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin: 2rem 0 1.5rem 0;
+
+      .username {
+        margin: 1rem 0;
+      }
+
+      .avatar {
+        width: 100px;
+        height: 100px;
+        background-color: $placeholder;
+        color: $secondary;
+        border-radius: 50%;
+        @include flex-center;
+        font-size: 2rem;
+      }
+    }
+
+    .nav-links {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .sidebar-buttons {
+        @include sidebar-buttons;
+        background-color: $secondary;
+        color: $primary;
+
+        &:hover {
+          @include hover1;
+        }
+        &:active {
+          @include link-active;
+        }
+      }
+      .register-link {
+        color: $secondary;
+        background: linear-gradient(
+          to right,
+          #01522b,
+          #02b860
+        ); /* Initial gradient */
+        background-size: 200%; /* Smooth animation */
+        transition: all 0.3s ease;
+        animation: gradient-animation 3s infinite alternate; /* Apply animation */
+
+        &:hover {
+          transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+      }
+      .login-link {
+        background-color: $primary;
+        color: $secondary;
+
+        &:hover {
+          @include hover2;
+        }
+      }
+      .icons {
+        display: flex;
+        margin-right: 0.5rem;
+        font-size: 1rem;
+      }
+    }
+  }
+
+  // Hide sidebar by default on small screens
+  @media (max-width: $breakpoint-tablet) {
+    &.open {
+      transform: translateX(0); // Slide in on toggle
+    }
+  }
+}
+
+/* Keyframes for animating the gradient */
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%; /* Start the gradient at the left */
+    transform: scale(1.05);
+  }
+  100% {
+    background-position: 100% 50%; /* Move the gradient to the right */
+  }
+}

@@ -1,0 +1,40 @@
+@import "./_variables";
+@import "./mixins";
+
+.food-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+
+  .food-card {
+    padding: 1rem;
+    @include card-border;
+    border-radius: 20px;
+    background-color: $secondary;
+    text-align: center;
+    transition: transform 0.3s ease;
+
+    h3 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    p {
+      margin: 0.5rem 0;
+      font-size: 0.9rem;
+      color: $placeholder;
+    }
+  }
+
+  .card-img {
+    border-radius: 20px;
+  }
+
+  .card-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5rem;
+  }
+}

@@ -1,0 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Adamina&family=Public+Sans:ital,wght@0,100..900;1,100..900");
+
+// colours
+$primary: #01522b;
+$secondary: #ffffff;
+$primary-shadow: #003119;
+$background: #fff9ed;
+$border: 1px solid $primary;
+$header: #424242;
+$placeholder: #747474;
+$card-border: #ebe2cf;
+
+// fonts
+$primary-font: "Public Sans", serif;
+$header-font: "Adamina", serif;
+
+// responsive
+$breakpoint-desktop: 1200px;
+$breakpoint-tablet: 768px;
+$breakpoint-mobile: 576px;

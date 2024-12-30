@@ -1,5 +1,7 @@
 @import "./_variables";
 @import "./mixins";
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
 
 .main-content {
   font-family: $primary-font;
@@ -19,4 +21,14 @@
   .primary-button {
     @include primary-button;
   }
+
+  // @media (max-width: $breakpoint-laptop) {
+  //   max-width: $breakpoint-laptop;
+  // }
+  // @media (max-width: $breakpoint-tablet) {
+  //   max-width: $breakpoint-tablet;
+  // }
+  // @media (max-width: $breakpoint-mobile) {
+  //   max-width: $breakpoint-mobile;
+  // }
 }

@@ -101,14 +101,20 @@ const MultiStepForm = () => {
           onChange={handleSelectChange}
         />
         <div className="form-buttons">
-          {currentStep > 0 && <button onClick={handleBack}>Back</button>}
+          {currentStep > 0 && (
+            <button className="primary-button" onClick={handleBack}>
+              Back
+            </button>
+          )}
           {currentStep < steps.length - 1 && (
             <button className="primary-button" onClick={handleNext}>
               Next
             </button>
           )}
           {currentStep === steps.length - 1 && (
-            <button onClick={handleSubmit}>Submit</button>
+            <button className="primary-button" onClick={handleSubmit}>
+              Submit
+            </button>
           )}
         </div>
       </div>

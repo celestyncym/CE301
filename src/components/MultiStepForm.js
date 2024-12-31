@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import StepNavigator from "./StepNavigator";
 import Select from "react-select";
 import "../styles/multiStepForm.scss";
+import { fetchIngredients } from "../api/ingredientApi";
 
-const MultiStepForm = () => {
+const MultiStepForm = ({ onSubmit }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({
     ingredients: [],

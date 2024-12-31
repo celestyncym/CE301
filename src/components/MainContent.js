@@ -7,7 +7,8 @@ import Slider from "react-slick";
 
 const MainContent = () => {
   const [selectedTag, setSelectedTag] = useState("All");
-  const [filteredFood, setFilteredFood] = useState([]);
+  const [recipes, setRecipes] = useState([]);
+  const [filteredRecipes, setFilteredRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const tags = ["All", "Breakfast", "Lunch", "Dinner", "Dessert"];
@@ -16,16 +17,9 @@ const MainContent = () => {
   const fetchRecipes = async () => {
     try {
       setLoading(true);
-      const response = await fetch("/api/recipes/scrape");
+      const response = await fetch("/api/recipes"); // Endpoint to fetch saved recipes
       const data = await response.json();
-
-      // Filter based on the selected tag
-      const filteredData =
-        selectedTag === "All"
-          ? data
-          : data.filter((recipe) => recipe.category === selectedTag);
-
-      setFilteredFood(filteredData);
+      setRecipes(data); // Store all recipes in state
       setLoading(false);
     } catch (error) {
       console.error("Error fetching recipes:", error);
@@ -33,14 +27,23 @@ const MainContent = () => {
     }
   };
 
+  // Filter recipes based on the selected tag
   useEffect(() => {
-    console.log("Filtered Food:", filteredFood);
-  }, [filteredFood]);
+    if (selectedTag === "All") {
+      setFilteredRecipes(recipes); // Show all recipes
+    } else {
+      setFilteredRecipes(
+        recipes.filter(
+          (recipe) => recipe.category.includes(selectedTag) // Check if the category array includes the selected tag
+        )
+      );
+    }
+  }, [selectedTag, recipes]);
 
-  // Fetch recipes when the component mounts or selectedTag changes
+  // Fetch recipes on component mount
   useEffect(() => {
     fetchRecipes();
-  }, [selectedTag]);
+  }, []);
 
   // Handle tag click
   const handleTagClick = (tag) => {
@@ -93,7 +96,7 @@ const MainContent = () => {
 
   return (
     <div className="main-content">
-      <h1 className="heading">Learn, Cook & Eat your favourite local food!</h1>
+      <h1 className="heading">Learn, Cook & Eat Your Favourite Local Food!</h1>
 
       {/* Tags for filtering */}
       <div className="tags">
@@ -102,38 +105,35 @@ const MainContent = () => {
             key={tag}
             label={tag}
             isActive={selectedTag === tag}
-            onClick={handleTagClick}
+            onClick={() => handleTagClick(tag)}
           />
         ))}
       </div>
 
-      {/* Food Cards */}
+      {/* Food Cards Carousel */}
       <div className="food-carousel">
         {loading ? (
           <div className="loading-placeholder">
             <p>Loading recipes...</p>
           </div>
-        ) : filteredFood.length > 0 ? (
+        ) : filteredRecipes.length > 0 ? (
           <Slider {...sliderSettings}>
-            {filteredFood.map((food, index) => (
-              <div key={index} className="food-card">
+            {filteredRecipes.map((recipe) => (
+              <div key={recipe._id} className="food-card">
                 <div
                   className="card-img"
                   style={{
-                    backgroundImage: `url(${food.thumbnail})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    height: "150px",
-                    borderRadius: "10px",
+                    backgroundImage: `url(${recipe.photoURL})`,
                   }}
                 ></div>
-                <h3>{food.title}</h3>
-                <p>{food.category || selectedTag}</p>
+                <h3>{recipe.name}</h3>
+                <p>{recipe.category.join(", ")}</p>{" "}
+                {/* Show multiple categories */}
                 <hr />
                 <div className="card-footer">
-                  <p>{food.prepTime || "10 mins"}</p>
+                  <p>{recipe.prepTime || "Unknown"} mins</p>
                   <a
-                    href={food.sourceURL}
+                    href={recipe.sourceURL}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -148,7 +148,7 @@ const MainContent = () => {
         )}
       </div>
 
-      <h1 className="heading">Looking for something specific?</h1>
+      <h1 className="heading">Looking for Something Specific?</h1>
 
       <MultiStepForm />
     </div>

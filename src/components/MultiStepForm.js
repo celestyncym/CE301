@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import StepNavigator from "./StepNavigator";
 import Select from "react-select";
 import "../styles/multiStepForm.scss";
+import { fetchIngredients } from "../api/ingredientApi";
 
-const MultiStepForm = () => {
+const MultiStepForm = ({ onSubmit }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({
     ingredients: [],
@@ -101,14 +102,20 @@ const MultiStepForm = () => {
           onChange={handleSelectChange}
         />
         <div className="form-buttons">
-          {currentStep > 0 && <button onClick={handleBack}>Back</button>}
+          {currentStep > 0 && (
+            <button className="primary-button" onClick={handleBack}>
+              Back
+            </button>
+          )}
           {currentStep < steps.length - 1 && (
             <button className="primary-button" onClick={handleNext}>
               Next
             </button>
           )}
           {currentStep === steps.length - 1 && (
-            <button onClick={handleSubmit}>Submit</button>
+            <button className="primary-button" onClick={handleSubmit}>
+              Submit
+            </button>
           )}
         </div>
       </div>

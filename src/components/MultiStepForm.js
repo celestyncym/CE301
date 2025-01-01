@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import StepNavigator from "./StepNavigator";
 import Select from "react-select";
 import "../styles/multiStepForm.scss";
 import { fetchIngredients } from "../api/ingredientApi";
+import { useNavigate } from "react-router-dom";
 
 const MultiStepForm = ({ onSubmit }) => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -14,16 +15,13 @@ const MultiStepForm = ({ onSubmit }) => {
     kitchenTools: [],
   });
 
+  const [ingredientOptions, setIngredientOptions] = useState([]);
+
   const steps = [
     {
       label: "What ingredients do you have?",
       key: "ingredients",
-      options: [
-        { value: "tomato", label: "Tomato" },
-        { value: "onion", label: "Onion" },
-        { value: "garlic", label: "Garlic" },
-        { value: "chicken", label: "Chicken" },
-      ],
+      options: ingredientOptions,
     },
     {
       label: "Which type of meal is it?",
@@ -67,6 +65,19 @@ const MultiStepForm = ({ onSubmit }) => {
     },
   ];
 
+  useEffect(() => {
+    // Fetch ingredients on component mount
+    const loadIngredients = async () => {
+      const ingredients = await fetchIngredients();
+      const options = ingredients.map((ingredient) => ({
+        value: ingredient._id,
+        label: ingredient.name,
+      }));
+      setIngredientOptions(options);
+    };
+    loadIngredients();
+  }, []);
+
   const handleNext = () => {
     if (currentStep < steps.length - 1) setCurrentStep((prev) => prev + 1);
   };
@@ -83,9 +94,14 @@ const MultiStepForm = ({ onSubmit }) => {
     }));
   };
 
+  const navigate = useNavigate();
+
   const handleSubmit = () => {
-    console.log("Form submitted:", formData);
-    // Add API submission logic here
+    const selectedIngredients = formData.ingredients.map((item) => item.value);
+
+    navigate("/search-results", {
+      state: { ingredients: selectedIngredients },
+    });
   };
 
   const currentOptions = steps[currentStep].options;

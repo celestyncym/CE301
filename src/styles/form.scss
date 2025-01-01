@@ -1,0 +1,37 @@
+@import "./_variables";
+@import "./mixins";
+
+.form-container {
+  padding: 2rem;
+  background-color: $secondary;
+  border-radius: 20px;
+  border: $border;
+  font-family: $primary-font;
+
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 0;
+  }
+
+  .form-input {
+    padding: 8px;
+    border-radius: 9px;
+    border: 1px solid $header;
+    outline: none;
+    margin-top: 0.4rem;
+  }
+
+  label {
+    color: $header;
+  }
+
+  button {
+    @include primary-button;
+  }
+}
+
+.edit-group {
+  display: flex;
+  flex-direction: row;
+}

@@ -24,7 +24,7 @@
   width: 300px !important;
   height: 500px;
   padding: 2rem;
-  @include card-border;
+  border: $border;
   border-radius: 10px;
   background-color: $secondary;
   text-align: center;

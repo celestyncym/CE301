@@ -8,7 +8,7 @@
   background-color: $secondary;
   color: $primary;
   font-family: $primary-font;
-  border-right: 1px solid $card-border;
+  border-right: 1px solid #ebe2cf;
   width: 250px;
   height: 100vh;
   position: fixed;
@@ -35,6 +35,14 @@
       align-items: center;
       text-align: center;
       margin: 2rem 0 1.5rem 0;
+
+      a {
+        text-decoration: underline;
+        color: $primary;
+
+        &:hover {
+        }
+      }
 
       .username {
         margin: 1rem 0;
@@ -66,23 +74,16 @@
         &:hover {
           @include hover1;
         }
-        &:active {
-          @include link-active;
-        }
       }
       .register-link {
         color: $secondary;
-        background: linear-gradient(
-          to right,
-          #01522b,
-          #02b860
-        ); /* Initial gradient */
-        background-size: 200%; /* Smooth animation */
+        background: linear-gradient(to right, #01522b, #02b860);
+        background-size: 200%;
         transition: all 0.3s ease;
-        animation: gradient-animation 3s infinite alternate; /* Apply animation */
+        animation: gradient-animation 3s infinite alternate;
 
         &:hover {
-          transform: scale(1.05); /* Slightly enlarge on hover */
+          transform: scale(1.05);
         }
       }
       .login-link {
@@ -118,4 +119,8 @@
   100% {
     background-position: 100% 50%; /* Move the gradient to the right */
   }
+}
+
+.sidebar-buttons.active {
+  @include link-active;
 }
